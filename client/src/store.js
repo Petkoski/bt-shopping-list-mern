@@ -1,4 +1,4 @@
-// Entry point to our redux store
+// File is entry point to our redux store (its purpose: to move the state from a component to a global store)
 // https://redux.js.org/api/store
 
 import { createStore, applyMiddleware, compose } from 'redux';
