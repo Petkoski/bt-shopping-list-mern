@@ -9,7 +9,7 @@ import {
     CSSTransition,
     TransitionGroup
 } from 'react-transition-group';
-import uuid from 'uuid'; //Module that generates unique ids
+// import uuid from 'uuid'; //Module that generates unique ids
 
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
@@ -47,14 +47,15 @@ class ShoppingList extends Component {
 
                 <ListGroup>
                     <TransitionGroup className="shopping-list">
-                        {items.map(({ id, name }) => (
-                            <CSSTransition key={id} timeout={500} classNames="fade">
+                        {items.map(({ _id, name }) => (
+                            <CSSTransition key={_id} timeout={500} classNames="fade">
+                                {/* _id coming from MongoDb */}
                                 <ListGroupItem>
                                     <Button
                                         className="remove-btn"
                                         color="danger"
                                         size="sm"
-                                        onClick={this.onDeleteClick.bind(this, id)}
+                                        onClick={this.onDeleteClick.bind(this, _id)}
                                         // onClick={() => {
                                         //     this.setState(state => ({
                                         //         items: state.items.filter(item => item.id !== id)
