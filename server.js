@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose'); //To interact with mongoDb
 const bodyParser = require('body-parser');
+const path = require('path'); //Core Node.JS module, no need to npm install
 
 const items = require('./routes/api/items');
 
@@ -21,6 +22,16 @@ mongoose.connect(db, { useNewUrlParser: true })
 //Use routes
 app.use('/api/items', items);
 
-const port = process.env.PORT || 5000;
+//Serve our static assets if in production
+if(process.env.NODE_ENV === 'production') {
+    //Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')); //Resolves to {current-dir}/client/build/index.html
+    });
+}
+
+const port = process.env.PORT || 5000; //process.env.PORT - Heroku's port
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
