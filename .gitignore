@@ -88,4 +88,4 @@ typings/
 .dynamodb/
 
 # Custom files (that Jovan selected)
-config/keys.js
+# config/keys.js
