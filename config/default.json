@@ -1,0 +1,5 @@
+{
+    "mongoURI": "mongodb+srv://jovan:6X15TZ2khZva4lN3@cluster0-dcbbk.mongodb.net/bt-mern-shopping-list?retryWrites=true&w=majority",
+    "dbName": "bt-mern-shopping-list",
+    "jwtSecret": "sl_jovansJwtSecret"
+}

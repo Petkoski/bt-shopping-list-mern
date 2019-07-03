@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose'); //To interact with mongoDb
 // const bodyParser = require('body-parser'); //Newer versions of express include body-parser
 const path = require('path'); //Core Node.JS module, no need to npm install
+const config = require('config'); //Package (organizes hierarchical configurations for your app deployments)
 
 const items = require('./routes/api/items');
 const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 
 const app = express();
 
@@ -15,8 +17,10 @@ const app = express();
 app.use(express.json()); //Newer versions of express include body-parser
 
 //DB config
-const db = require('./config/keys').mongoURI;
-const dbName = require('./config/keys').dbName;
+// const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
+// const dbName = require('./config/keys').dbName;
+
 
 //Connect to MongoDB
 mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true })
@@ -26,6 +30,7 @@ mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true })
 //Use routes
 app.use('/api/items', items);
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 //Serve our static assets if in production
 if(process.env.NODE_ENV === 'production') {
